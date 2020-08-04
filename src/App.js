@@ -9,7 +9,6 @@ class App extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: [], 
       temp: 0,
       cOrF: "F",
       currentTemp: "C",
@@ -25,7 +24,7 @@ class App extends React.Component {
         console.log("Not Available");
       }
 
-    {/* navigator.geolocation.getCurrentPosition(
+    /*navigator.geolocation.getCurrentPosition(
       (position) => {
         let lat = position.coords.latitude
         let lng = position.coords.longitude
@@ -37,7 +36,7 @@ class App extends React.Component {
       (error) => {
         console.error(JSON.stringify(error))
       }
-    ) */}
+    )*/
   fetch(this.state.url)
     .then(res => res.json())
     .then(
@@ -93,13 +92,19 @@ render() {
       return <div>Loading...</div>;
     }else {
       return (
-        <div>
-         <div> <img src = {this.state.data.icon}></img></div>
-          <div>
-            <p> It is {this.state.temp}{this.state.currentTemp} outside with {this.state.data.weather[0].description}.</p>
-          </div>
-          <button onClick={this.handleClick}>Change to temperature to {this.state.cOrF}</button>
-        </div>);
+          <header>
+            <div>
+              <div> 
+                <h1>Weather in {this.state.data.name}</h1>
+              </div>
+              <div>
+                <img src = {this.state.data.icon} alt="Weather icon"></img>
+                <p> Temperature is {this.state.temp}{this.state.currentTemp} with {this.state.data.weather[0].description}.</p>
+              </div>
+               <button onClick={this.handleClick}>Change the temperature to {this.state.cOrF}</button>
+              </div>
+          </header>
+      );
     }
   }
 }
